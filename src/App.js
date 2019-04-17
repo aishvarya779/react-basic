@@ -1,18 +1,42 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import axios from 'axios';
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      users: [],
+      loading: false
+    };
+  }
+
+  getUsers() {
+    this.setState({ loading: true });
+    axios('https://randomuser.me/api/?nat=US&results=5').then(response =>
+      this.setState({ users: response.data.results, loading: false })
+    );
+    // .then(response => {
+    //   console.log(response);
+    // });
+  }
+  componentWillMount() {
+    this.getUsers();
+  }
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <h1>Welcome To React World</h1>
-        </header>
+        {this.state.loading ? (
+          <h4>Loading...</h4>
+        ) : (
+          this.state.users.map(user => (
+            <div>
+              <h3>{user.name.first + '  ' + user.name.last}</h3>
+              <p>EMAIL: {user.email}</p>
+              <p>MOBILE: {user.cell}</p>
+              <hr />
+            </div>
+          ))
+        )}
       </div>
     );
   }
