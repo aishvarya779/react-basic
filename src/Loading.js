@@ -1,6 +1,12 @@
 import React from 'react';
 
-const Loading = () => <h1>Loading...</h1>;
+// const Loading = () => <h1>Loading...</h1>;
+
+// component with input props
+const Loading = props => <h1>{props.message}</h1>;
+
+// use of destructring
+// const Loading = ({ message }) => <h1>{message}</h1>;
 
 export default Loading;
 

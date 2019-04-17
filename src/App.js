@@ -28,7 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.loading ? (
-          <Loading />
+          <Loading message="Wait Its Loading" />
         ) : (
           this.state.users.map(user => (
             <div>
