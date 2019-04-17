@@ -20,7 +20,10 @@ class App extends Component {
   getUsers() {
     this.setState({ loading: true });
     axios('https://randomuser.me/api/?nat=US&results=5').then(response =>
-      this.setState({ users: response.data.results, loading: false })
+      this.setState({
+        users: [...response.data.results, ...this.state.users],
+        loading: false
+      })
     );
     // .then(response => {
     //   console.log(response);
