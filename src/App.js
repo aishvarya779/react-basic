@@ -10,8 +10,13 @@ class App extends Component {
       users: [],
       loading: false
     };
-  }
 
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  handleSubmit(evt) {
+    evt.preventDefault();
+    this.getUsers();
+  }
   getUsers() {
     this.setState({ loading: true });
     axios('https://randomuser.me/api/?nat=US&results=5').then(response =>
@@ -27,6 +32,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <form onSubmit={this.handleSubmit}>
+          <input type="submit" value="Get More Users" />
+        </form>
         {this.state.loading ? (
           <Loading message="Wait Its Loading" />
         ) : (
