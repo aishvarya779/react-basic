@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
+import Loading from './Loading';
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -26,7 +28,7 @@ class App extends Component {
     return (
       <div className="App">
         {this.state.loading ? (
-          <h4>Loading...</h4>
+          <Loading />
         ) : (
           this.state.users.map(user => (
             <div>
